@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import stockMethods from "../services/stock.service";
 import Nav from "../components/Nav";
@@ -8,6 +8,7 @@ const AddLsPage = () => {
     const { isLoading, isLoggedIn } = useContext(AuthContext);
     const [stockNumber, setStockNumber] = useState("");
     const [stockType, setStockType] = useState("");
+    const [message, setMessage] = useState("");
 
     const handleStockNumber = (e) => {
         setStockNumber(e.target.value);
@@ -28,8 +29,9 @@ const AddLsPage = () => {
             stockNumber: stockNumber,
             stockType: stockType
           })
-
-            console.log(response)
+          setStockNumber("")
+          setStockType("")
+          setMessage(response.message)
         } catch (error) {
           console.log(error)
         }
@@ -39,6 +41,7 @@ const AddLsPage = () => {
   return (
     <>
       <Nav />
+      {isLoggedIn &&
       <div>
           <form onSubmit={handleSubmit}>
           <input 
@@ -61,7 +64,9 @@ const AddLsPage = () => {
                   Add
               </button>
           </form>
+          <p>{message}</p>
       </div>
+      }
     </>
   )
 }
