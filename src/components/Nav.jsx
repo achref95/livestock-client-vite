@@ -8,7 +8,11 @@ const Nav = () => {
 
   return (
     <div className="navbar bg-green-800 text-neutral-content">
-      <button className="btn btn-ghost text-xl mr-auto">LiveStock App</button>
+      <button 
+        className="btn btn-ghost text-xl mr-auto"
+        onClick={() => {navigate("/")}}>
+        LiveStock App
+        </button>
       {isLoggedIn &&       
         <button className="btn btn-error" onClick={() => { 
           logOutUser(); 

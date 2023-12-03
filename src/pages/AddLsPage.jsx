@@ -53,18 +53,18 @@ const AddLsPage = () => {
       <Nav />
       {isLoggedIn &&
       <div>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="mt-8">
           <input 
               type="text" 
               placeholder="Live Stock Number" 
-              className="input input-bordered input-accent w-full max-w-xs"
+              className="input input-bordered input-accent w-full max-w-xs mr-4"
               value={stockNumber}
               onChange={handleStockNumber} 
               />
           <input 
               type="text" 
               placeholder="Live Stock Type" 
-              className="input input-bordered input-accent w-full max-w-xs" 
+              className="input input-bordered input-accent w-full max-w-xs mr-4" 
               value={stockType}
               onChange={handleStockType}
               />
