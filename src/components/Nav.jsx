@@ -1,13 +1,24 @@
-import React from 'react'
+import { useContext } from "react";
+import { AuthContext } from "../context/auth.context";
+import { useNavigate } from "react-router-dom";
 
 const Nav = () => {
-  return (
-    <>
-        <div className="navbar bg-green-800 text-neutral-content">
-            <button className="btn btn-ghost text-xl">LiveStock App</button>
-        </div>
-    </>
-  )
-}
+  const { isLoggedIn, logOutUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-export default Nav
+  return (
+    <div className="navbar bg-green-800 text-neutral-content">
+      <button className="btn btn-ghost text-xl mr-auto">LiveStock App</button>
+      {isLoggedIn &&       
+        <button className="btn btn-error" onClick={() => { 
+          logOutUser(); 
+          navigate("/"); 
+          }}>
+            Log Out
+        </button> }
+
+    </div>
+  );
+};
+
+export default Nav;
