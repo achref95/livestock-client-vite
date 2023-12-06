@@ -19,9 +19,26 @@ const addStock = async ({ stockNumber, stockType }) => {
   }
 };
 
+const getAllLs = async () => {
+  try {
+    const token = localStorage.getItem("authToken");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const response = await api.get("/ls/getls", config);
+    console.log(response.data)
+    return response.data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 
 const stockMethods = {
   addStock,
+  getAllLs,
 };
 
 export default stockMethods;
