@@ -3,6 +3,7 @@ import HomePage from "./pages/HomePage";
 import SignUp from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage"
 import AddLsPage from "./pages/AddLsPage";
+import EditLsPage from "./pages/EditLsPage";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/add" element={<AddLsPage />} />
+        <Route path="/get" element={<EditLsPage />} />
       </Routes>
     </>
   );
