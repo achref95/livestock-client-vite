@@ -33,12 +33,33 @@ const getAllLs = async () => {
   } catch (error) {
     console.log(error)
   }
-}
+};
+
+const getOneLs = async ({ stockNumber }) => {
+  try {
+    const token = localStorage.getItem("authToken");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      params: {
+        stockNumber: stockNumber,
+      },
+    };
+    const response = await api.get("/ls/getone", config);
+    // console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 
 
 const stockMethods = {
   addStock,
   getAllLs,
+  getOneLs,
 };
 
 export default stockMethods;
