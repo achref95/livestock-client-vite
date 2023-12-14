@@ -32,6 +32,10 @@ const AddLsPage = () => {
           setStockNumber("")
           setStockType("")
           setMessage(response.message)
+
+          setTimeout(() => {
+            setMessage("");
+          }, 5000);
         } catch (error) {
           console.log(error)
         }
@@ -49,35 +53,37 @@ const AddLsPage = () => {
   }  
 
   return (
-    <>
-      <Nav />
-      {isLoggedIn &&
-      <div>
-          <form onSubmit={handleSubmit} className="mt-8">
-          <input 
-              type="text" 
-              placeholder="Live Stock Number" 
-              className="input input-bordered input-accent w-full max-w-xs mr-4"
-              value={stockNumber}
-              onChange={handleStockNumber} 
-              />
-          <input 
-              type="text" 
-              placeholder="Live Stock Type" 
-              className="input input-bordered input-accent w-full max-w-xs mr-4" 
-              value={stockType}
-              onChange={handleStockType}
-              />
-              <button 
-                  className="btn btn-success"
-                  onClick={handleSubmit}>
-                  Add
-              </button>
-          </form>
-          <p>{message}</p>
-      </div>
-      }
-    </>
+<>
+  <Nav />
+  {isLoggedIn && (
+    <div className="flex flex-col items-center justify-center">
+      <form onSubmit={handleSubmit} className="mt-8">
+        <div className="flex flex-col items-center">
+          <input
+            type="text"
+            placeholder="Live Stock Number"
+            className="input input-bordered input-accent w-full max-w-xs mb-4"
+            value={stockNumber}
+            onChange={handleStockNumber}
+          />
+          <input
+            type="text"
+            placeholder="Live Stock Type"
+            className="input input-bordered input-accent w-full max-w-xs mb-4"
+            value={stockType}
+            onChange={handleStockType}
+          />
+          <button className="btn btn-success btn-wide" type="submit">
+            Add
+          </button>
+        </div>
+      </form>
+      <p className="text-green-600">{message}</p>
+    </div>
+  )}
+</>
+
+
   )
 }
 
