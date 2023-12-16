@@ -12,7 +12,7 @@ const addStock = async ({ stockNumber, stockType }) => {
         Authorization: `Bearer ${token}`,
       },
     };
-    const response = await api.post("/ls/addls", { stockNumber, stockType }, config);
+    const response = await api.post("/livestock/addls", { stockNumber, stockType }, config);
     return response.data;
   } catch (err) {
     console.error(err);
