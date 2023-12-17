@@ -27,7 +27,7 @@ const getAllLs = async () => {
         Authorization: `Bearer ${token}`,
       },
     };
-    const response = await api.get("/ls/getls", config);
+    const response = await api.get("/livestock/getls", config);
     console.log(response.data)
     return response.data
   } catch (error) {
@@ -46,8 +46,8 @@ const getOneLs = async ({ stockNumber }) => {
         stockNumber: stockNumber,
       },
     };
-    const response = await api.get("/ls/getone", config);
-    // console.log(response.data);
+    const response = await api.get("/livestock/getone", config);
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.log(error);
