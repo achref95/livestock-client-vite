@@ -22,7 +22,7 @@ const EditLsPage = () => {
     try {
       const result = await stockMethods.getAllLs();
       console.log(result)
-      setAllCattle(result.LiveStock)
+      setAllCattle(result.LiveStock.result)
     } catch (error) {
       console.log(error)
     }

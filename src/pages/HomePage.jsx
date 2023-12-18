@@ -1,10 +1,27 @@
 import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import stockMethods from "../services/stock.service";
 import Nav from "../components/Nav";
 
 const HomePage = () => {
   const { isLoggedIn, isLoading } = useContext(AuthContext);
+  const [total, setTotal] = useState("")
+
+  useEffect(() =>{
+    const totalAnimals = async() => {
+      try {
+        if (isLoggedIn) {
+          const total = await stockMethods.getAllLs()
+          console.log(total.LiveStock.total)
+          setTotal(total.LiveStock.total)
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    totalAnimals()
+  },[isLoggedIn])
 
   if (isLoading) {
     return (
@@ -23,7 +40,7 @@ const HomePage = () => {
         <Nav />
         <div className="flex items-center justify-around mt-8">
           <div className="bg-white p-6 rounded-lg shadow-md w-40 h-40 bg-orange-300">
-            <p>Total Animals</p>
+            <p>Total Animals: {total}</p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-md w-40 h-40">
             <p>test</p>
