@@ -22,7 +22,7 @@ const Nav = () => {
     //     </button> }
 
     // </div>
-    <div className="drawer">
+    <div className="drawer z-50">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" /> 
       <div className="drawer-content flex flex-col">
         {/* Navbar */}

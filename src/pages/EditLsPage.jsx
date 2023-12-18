@@ -8,6 +8,7 @@ const EditLsPage = () => {
   const { isLoading, isLoggedIn } = useContext(AuthContext);
   const [stockNumber, setStockNumber] = useState("");
   const [stockDetail, setStockDetail] = useState([]);
+  const [allCattle, setAllCattle] = useState([]);
   const [display, setDisplay] = useState(false);
 
   const handleStockNumber = async (e) => {
@@ -16,9 +17,12 @@ const EditLsPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setDisplay(true)
+    setStockDetail([])
     try {
       const result = await stockMethods.getAllLs();
       console.log(result)
+      setAllCattle(result.LiveStock)
     } catch (error) {
       console.log(error)
     }
@@ -26,6 +30,7 @@ const EditLsPage = () => {
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
     setDisplay(true)
+    setAllCattle([])
     try {
       const result = await stockMethods.getOneLs({ stockNumber });
       console.log(result.ls)
@@ -74,8 +79,41 @@ const EditLsPage = () => {
             </button>
          </div>
          <div>
-          {display && stockDetail.length > 0 && stockDetail[0] && <p>Stock Type: {stockDetail[0].stockType}</p>}
+          
+         {display && stockDetail?.length > 0 && (
+            <p className="text-lg font-bold text-blue-500 ml-4 mt-4">
+              Stock Type: {stockDetail[0].stockType}
+            </p>
+          )}
          </div>
+         <div>
+          {display && allCattle?.length > 0 && (
+            <div className="overflow-x-auto mb-8">
+            <table className="table">
+              {/* head */}
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Stock Number</th>
+                  <th>Stock Type</th>
+                  <th>Comment</th>
+                </tr>
+              </thead>
+              <tbody>
+                {allCattle.map((cattle, index) => (
+                  <tr key={cattle._id}>
+                    <th>{index + 1}</th>
+                    <td>{cattle.stockNumber}</td>
+                    <td>{cattle.stockType}</td>
+                    <td>{/* Add your comment field from the cattle object */}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          )}
+        </div>
+
         </div>
       }
 
