@@ -4,7 +4,7 @@ const api = axios.create({
   baseURL: import.meta.env.VITE_APP_API_URL
 });
 
-const addStock = async ({ stockNumber, stockType }) => {
+const addStock = async ({ stockNumber, stockType, comment }) => {
   try {
     const token = localStorage.getItem("authToken");
     const config = {
@@ -12,7 +12,7 @@ const addStock = async ({ stockNumber, stockType }) => {
         Authorization: `Bearer ${token}`,
       },
     };
-    const response = await api.post("/livestock/addls", { stockNumber, stockType }, config);
+    const response = await api.post("/livestock/addls", { stockNumber, stockType, comment }, config);
     return response.data;
   } catch (err) {
     console.error(err);

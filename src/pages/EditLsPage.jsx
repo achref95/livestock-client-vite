@@ -105,7 +105,7 @@ const EditLsPage = () => {
                     <th>{index + 1}</th>
                     <td>{cattle.stockNumber}</td>
                     <td>{cattle.stockType}</td>
-                    <td>{/* Add your comment field from the cattle object */}</td>
+                    <td>{cattle.comment}</td>
                   </tr>
                 ))}
               </tbody>

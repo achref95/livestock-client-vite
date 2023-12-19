@@ -8,6 +8,7 @@ const AddLsPage = () => {
     const { isLoading, isLoggedIn } = useContext(AuthContext);
     const [stockNumber, setStockNumber] = useState("");
     const [stockType, setStockType] = useState("");
+    const [comment, setComment] = useState("");
     const [message, setMessage] = useState("");
 
     const handleStockNumber = (e) => {
@@ -18,6 +19,10 @@ const AddLsPage = () => {
         setStockType(e.target.value);
       };
 
+    const handleComent =(e) => {
+        setComment(e.target.value)
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -27,10 +32,12 @@ const AddLsPage = () => {
           }
           const response = await stockMethods.addStock({
             stockNumber: stockNumber,
-            stockType: stockType
+            stockType: stockType,
+            comment: comment
           })
           setStockNumber("")
           setStockType("")
+          setComment("")
           setMessage(response.message)
 
           setTimeout(() => {
@@ -72,6 +79,13 @@ const AddLsPage = () => {
             className="input input-bordered input-accent w-full max-w-xs mb-4"
             value={stockType}
             onChange={handleStockType}
+          />
+          <input
+            type="text"
+            placeholder="Live Stock Comment"
+            className="input input-bordered input-accent w-full max-w-xs mb-4"
+            value={comment}
+            onChange={handleComent}
           />
           <button className="btn btn-success btn-wide" type="submit">
             Add
