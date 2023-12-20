@@ -84,6 +84,22 @@ const updateLs = async ({ stockId, stockNumber, stockType, comment }) => {
   }
 }
 
+const deleteLs = async ({ stockId }) => {
+  try {
+    const token = localStorage.getItem("authToken");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const response = await api.delete(`livestock/getls/${stockId}/delete`, config)
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 
 
 
@@ -93,6 +109,7 @@ const stockMethods = {
   getOneLs,
   getOneLsDetail,
   updateLs,
+  deleteLs,
 };
 
 export default stockMethods;

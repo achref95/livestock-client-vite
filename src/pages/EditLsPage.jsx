@@ -1,15 +1,20 @@
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/auth.context";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import stockMethods from "../services/stock.service";
 import Nav from "../components/Nav";
 
 const EditLsPage = () => {
   const { isLoggedIn, isLoading } = useContext(AuthContext);
+
   const stockId = useParams();
+  const navigate = useNavigate();
+
   const [editNumber, setEditNumber] = useState("");
   const [editType, setEditType] = useState("");
   const [editComment, setEditComment] = useState("");
+
+
 
   const handleEditNumber = (e) => {
     setEditNumber(e.target.value);
@@ -34,6 +39,17 @@ const EditLsPage = () => {
       })
 
       console.log(result)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const deleteCattle = async (e) => {
+    try {
+      const result = await stockMethods.deleteLs({stockId: stockId.stockId})
+      if (result && result.message === "cattle has been deleted") {
+        navigate("/get")
+      }
     } catch (error) {
       console.log(error)
     }
@@ -99,6 +115,7 @@ const EditLsPage = () => {
             />
             <button className="btn btn-accent" type="submit">Edit cattle</button>
           </form>
+          <button className="btn btn-error" onClick={() => {deleteCattle()}}>Delete</button>
         </div>
       )}
     </div>
