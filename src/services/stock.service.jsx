@@ -68,6 +68,23 @@ const getOneLsDetail = async ({ stockId }) => {
   }
 }
 
+const updateLs = async ({ stockId, stockNumber, stockType, comment }) => {
+  try {
+    const token = localStorage.getItem("authToken");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const response = await api.put(`/livestock/getls/${stockId}/update`, {stockNumber, stockType, comment}, config);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
 
 
 const stockMethods = {
@@ -75,6 +92,7 @@ const stockMethods = {
   getAllLs,
   getOneLs,
   getOneLsDetail,
+  updateLs,
 };
 
 export default stockMethods;

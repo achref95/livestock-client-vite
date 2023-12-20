@@ -5,26 +5,56 @@ import stockMethods from "../services/stock.service";
 import Nav from "../components/Nav";
 
 const EditLsPage = () => {
-  const {isLoggedIn, isLoading} = useContext(AuthContext);
+  const { isLoggedIn, isLoading } = useContext(AuthContext);
   const stockId = useParams();
-  const [cattleDetail, setCattleDetail] = useState([]);
+  const [editNumber, setEditNumber] = useState("");
+  const [editType, setEditType] = useState("");
+  const [editComment, setEditComment] = useState("");
 
-  const handleStockNumberUpdate = async (e) => {
-    
+  const handleEditNumber = (e) => {
+    setEditNumber(e.target.value);
+  };
+
+  const handleEditType = (e) => {
+    setEditType(e.target.value);
+  };
+
+  const handleEditComment = (e) => {
+    setEditComment(e.target.value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const result = await stockMethods.updateLs({
+        stockId: stockId.stockId,
+        stockNumber: editNumber,
+        stockType: editType,
+        comment: editComment
+      })
+
+      console.log(result)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   useEffect(() => {
     const getLiveStockDetail = async () => {
       try {
         const result = await stockMethods.getOneLsDetail(stockId);
-        console.log(result.cattle)
-        setCattleDetail(result.cattle)
+        console.log('Frontend stockId:', stockId.stockId);
+
+        setEditNumber(result.cattle?.stockNumber || "");
+        setEditType(result.cattle?.stockType || ""); // Uncomment if needed
+        setEditComment(result.cattle?.comment || ""); // Uncomment if needed
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-    }
-    getLiveStockDetail()
-  }, [isLoggedIn])
+    };
+
+    getLiveStockDetail();
+  }, [isLoggedIn, stockId]);
 
   if (isLoading) {
     return (
@@ -34,28 +64,46 @@ const EditLsPage = () => {
         <span className="loading loading-ring loading-md"></span>
         <span className="loading loading-ring loading-lg"></span>
       </div>
-    )
-  } 
+    );
+  }
 
   return (
     <div>
       <Nav />
       {isLoggedIn && (
-        <div>
-          {/* <div>{cattleDetail?.stockNumber}</div>
-          <div>{cattleDetail?.stockType}</div>
-          <div>{cattleDetail?.comment}</div> */}
-            <input 
-              type="text" 
-              placeholder="Live Stock Number" 
+        <div className="flex flex-col items-center">
+          <form onSubmit={handleSubmit}>
+            <p>Edit cattle number:</p>
+            <input
+              type="text"
+              placeholder="Live Stock Number"
               className="input input-bordered input-accent w-full max-w-xs mt-8 mb-4"
-              value={cattleDetail?.stockNumber}
-              // onChange={handleStockNumber} 
+              value={editNumber}
+              onChange={handleEditNumber}
             />
+            <p>Edit cattle type:</p>
+            <input
+              type="text"
+              placeholder="Live Stock Number"
+              className="input input-bordered input-accent w-full max-w-xs mt-8 mb-4"
+              value={editType}
+              onChange={handleEditType}
+            />
+            <p>Edit cattle comment:</p>
+            <input
+              type="text"
+              placeholder="Live Stock Number"
+              className="input input-bordered input-accent w-full max-w-xs mt-8 mb-4"
+              value={editComment}
+              onChange={handleEditComment}
+            />
+            <button className="btn btn-accent" type="submit">Edit cattle</button>
+          </form>
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default EditLsPage
+export default EditLsPage;
+
