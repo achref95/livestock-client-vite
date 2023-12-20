@@ -22,7 +22,6 @@ const EditLsPage = () => {
     setStockDetail([])
     try {
       const result = await stockMethods.getAllLs();
-      console.log(result)
       setAllCattle(result.LiveStock.result)
     } catch (error) {
       console.log(error)
@@ -34,7 +33,6 @@ const EditLsPage = () => {
     setAllCattle([])
     try {
       const result = await stockMethods.getOneLs({ stockNumber });
-      console.log(result.ls)
       setStockDetail(result.ls)
 
     } catch (error) {
@@ -101,20 +99,20 @@ const EditLsPage = () => {
                 </tr>
               </thead>
               <tbody>
-  {allCattle.map((cattle, index) => (
-    <tr key={cattle._id}>
-      <th>{index + 1}</th>
-      <td>
-        {/* Use the Link component instead of an anchor tag */}
-        <Link to={`/get/${cattle._id}`}>
-          {cattle.stockNumber}
-        </Link>
-      </td>
-      <td>{cattle.stockType}</td>
-      <td>{cattle.comment}</td>
-    </tr>
-  ))}
-</tbody>
+                {allCattle.map((cattle, index) => (
+                  <tr key={cattle._id}>
+                    <th>{index + 1}</th>
+                    <td>
+                      {/* Use the Link component instead of an anchor tag */}
+                      <Link to={`/get/${cattle._id}`}>
+                        {cattle.stockNumber}
+                      </Link>
+                    </td>
+                    <td>{cattle.stockType}</td>
+                    <td>{cattle.comment}</td>
+                  </tr>
+                ))}
+              </tbody>
             </table>
           </div>
           )}

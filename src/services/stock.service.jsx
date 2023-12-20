@@ -28,7 +28,6 @@ const getAllLs = async () => {
       },
     };
     const response = await api.get("/livestock/getls", config);
-    console.log(response.data)
     return response.data
   } catch (error) {
     console.log(error)
@@ -47,12 +46,27 @@ const getOneLs = async ({ stockNumber }) => {
       },
     };
     const response = await api.get("/livestock/getone", config);
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.log(error);
   }
 };
+
+const getOneLsDetail = async ({ stockId }) => {
+  try {
+    const token = localStorage.getItem("authToken");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const response = await api.get(`/livestock/getls/${stockId}`, config);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 
 
@@ -60,6 +74,7 @@ const stockMethods = {
   addStock,
   getAllLs,
   getOneLs,
+  getOneLsDetail,
 };
 
 export default stockMethods;
