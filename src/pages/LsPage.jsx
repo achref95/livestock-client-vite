@@ -5,7 +5,7 @@ import stockMethods from "../services/stock.service";
 import Nav from "../components/Nav";
 
 
-const EditLsPage = () => {
+const LsPage = () => {
   const { isLoading, isLoggedIn } = useContext(AuthContext);
   const [stockNumber, setStockNumber] = useState("");
   const [stockDetail, setStockDetail] = useState([]);
@@ -125,4 +125,4 @@ const EditLsPage = () => {
   )
 }
 
-export default EditLsPage
+export default LsPage
