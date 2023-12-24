@@ -70,8 +70,8 @@ const AddLsPage = () => {
 <>
   <Nav />
   {isLoggedIn && (
-    <div className="flex flex-col items-center justify-center bg-slate-100">
-      <form onSubmit={handleSubmit} className="mt-8">
+    <div className="bg-slate-100 h-screen">
+      <form onSubmit={handleSubmit} className="mt-8 flex flex-col items-center justify-center">
         <div className="flex flex-col items-center">
           <input
             type="text"
