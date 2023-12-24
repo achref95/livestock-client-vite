@@ -68,7 +68,7 @@ const getOneLsDetail = async ({ stockId }) => {
   }
 }
 
-const updateLs = async ({ stockId, stockNumber, stockType, comment }) => {
+const updateLs = async ({ stockId, stockNumber, stockType, age, comment }) => {
   try {
     const token = localStorage.getItem("authToken");
     const config = {
@@ -76,7 +76,7 @@ const updateLs = async ({ stockId, stockNumber, stockType, comment }) => {
         Authorization: `Bearer ${token}`,
       },
     };
-    const response = await api.put(`/livestock/getls/${stockId}/update`, {stockNumber, stockType, comment}, config);
+    const response = await api.put(`/livestock/getls/${stockId}/update`, {stockNumber, stockType, age, comment}, config);
     console.log(response.data);
     return response.data;
   } catch (error) {

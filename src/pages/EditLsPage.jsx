@@ -12,6 +12,7 @@ const EditLsPage = () => {
 
   const [editNumber, setEditNumber] = useState("");
   const [editType, setEditType] = useState("");
+  const [editAge, setEditAge] = useState("");
   const [editComment, setEditComment] = useState("");
 
 
@@ -22,6 +23,10 @@ const EditLsPage = () => {
 
   const handleEditType = (e) => {
     setEditType(e.target.value);
+  };
+
+  const handleEditAge = (e) => {
+    setEditAge(e.target.value);
   };
 
   const handleEditComment = (e) => {
@@ -35,6 +40,7 @@ const EditLsPage = () => {
         stockId: stockId.stockId,
         stockNumber: editNumber,
         stockType: editType,
+        age: editAge,
         comment: editComment
       })
 
@@ -62,8 +68,9 @@ const EditLsPage = () => {
         console.log('Frontend stockId:', stockId.stockId);
 
         setEditNumber(result.cattle?.stockNumber || "");
-        setEditType(result.cattle?.stockType || ""); // Uncomment if needed
-        setEditComment(result.cattle?.comment || ""); // Uncomment if needed
+        setEditType(result.cattle?.stockType || "");
+        setEditAge(result.cattle?.age || "");
+        setEditComment(result.cattle?.comment || "");
       } catch (error) {
         console.log(error);
       }
@@ -104,6 +111,14 @@ const EditLsPage = () => {
               className="input input-bordered input-accent w-full max-w-xs mt-8 mb-4"
               value={editType}
               onChange={handleEditType}
+            />
+            <p>Edit cattle Age:</p>
+            <input
+              type="text"
+              placeholder="Live Stock Age"
+              className="input input-bordered input-accent w-full max-w-xs mt-8 mb-4"
+              value={editAge}
+              onChange={handleEditAge}
             />
             <p>Edit cattle comment:</p>
             <input
