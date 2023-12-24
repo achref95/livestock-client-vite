@@ -8,6 +8,7 @@ const AddLsPage = () => {
     const { isLoading, isLoggedIn } = useContext(AuthContext);
     const [stockNumber, setStockNumber] = useState("");
     const [stockType, setStockType] = useState("");
+    const [age, setAge] = useState("");
     const [comment, setComment] = useState("");
     const [message, setMessage] = useState("");
 
@@ -19,6 +20,10 @@ const AddLsPage = () => {
         setStockType(e.target.value);
       };
 
+    const handleStockAge = (e) => {
+        setAge(e.target.value);
+      };
+
     const handleComent =(e) => {
         setComment(e.target.value)
     }
@@ -27,16 +32,18 @@ const AddLsPage = () => {
         e.preventDefault();
 
         try {
-          if (!stockType || !stockNumber) {
+          if (!stockType || !stockNumber || !age) {
             alert('Please fill out all fields');
           }
           const response = await stockMethods.addStock({
             stockNumber: stockNumber,
             stockType: stockType,
+            age: age,
             comment: comment
           })
           setStockNumber("")
           setStockType("")
+          setAge("")
           setComment("")
           setMessage(response.message)
 
@@ -79,6 +86,13 @@ const AddLsPage = () => {
             className="input input-bordered input-accent w-full max-w-xs mb-4"
             value={stockType}
             onChange={handleStockType}
+          />
+          <input
+            type="text"
+            placeholder="Age ex: 1y8m, 9m, 18d"
+            className="input input-bordered input-accent w-full max-w-xs mb-4"
+            value={age}
+            onChange={handleStockAge}
           />
           <input
             type="text"
