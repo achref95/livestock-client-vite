@@ -13,8 +13,8 @@ const HomePage = () => {
       try {
         if (isLoggedIn) {
           const total = await stockMethods.getAllLs()
-          console.log(total.LiveStock.total)
-          setTotal(total.LiveStock.total)
+          const totalValue = total.LiveStock.total || 0
+          setTotal(totalValue)
         }
       } catch (error) {
         console.log(error)

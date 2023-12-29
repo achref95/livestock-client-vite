@@ -71,8 +71,8 @@ const AddLsPage = () => {
   <Nav />
   {isLoggedIn && (
     <div className="bg-slate-100 h-screen">
-      <form onSubmit={handleSubmit} className="mt-8 flex flex-col items-center justify-center">
-        <div className="flex flex-col items-center">
+      <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center mt-8 ">
           <input
             type="text"
             placeholder="Live Stock Number"
